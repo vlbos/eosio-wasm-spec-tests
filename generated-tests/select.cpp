@@ -16,7 +16,7 @@ BOOST_DATA_TEST_CASE(select_0_check_throw, boost::unit_test::data::xrange(0,6), 
    test.name = account_name((uint64_t)index);
    test.authorization = {{N(wasmtest), config::active_name}};
 
-   BOOST_CHECK_THROW(push_action(tester, std::move(test), N(wasmtest).to_uint64_t()), wasm_execution_error);
+   BOOST_CHECK_THROW(push_action(tester, std::move(test), N(wasmtest)), wasm_execution_error);
    tester.produce_block();
 } FC_LOG_AND_RETHROW() }
 
@@ -33,7 +33,7 @@ BOOST_DATA_TEST_CASE(select_0_pass, boost::unit_test::data::xrange(6,7), index) 
    test.name = account_name((uint64_t)index);
    test.authorization = {{N(wasmtest), config::active_name}};
 
-   push_action(tester, std::move(test), N(wasmtest).to_uint64_t());
+   push_action(tester, std::move(test), N(wasmtest));
    tester.produce_block();
    BOOST_REQUIRE_EQUAL( tester.validate(), true );
 } FC_LOG_AND_RETHROW() }
